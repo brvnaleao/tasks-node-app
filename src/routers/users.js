@@ -93,6 +93,9 @@ router.put("/users/:id", async (req, res) => {
   const isValidOperation = updates.every((update) =>
     allowedMethods.includes(update)
   );
+  if (!isValidOperation) {
+    res.status(400).send({ error: "Invalid updates!" });
+  }
 
   try {
     // const user = await User.findByIdAndUpdate(req.params.id, req.body, {
